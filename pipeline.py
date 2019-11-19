@@ -17,6 +17,6 @@ winner = requests.delete(votingUrl, headers = headers)
 winner = json.loads(winner.text)['winner']
 
 if winner == expectedWinner:
-    sys.exit("0")
+    sys.exit(0)
 else:
-    sys.exit("1")
+    sys.exit(1)

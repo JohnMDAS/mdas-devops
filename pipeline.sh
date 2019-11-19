@@ -48,7 +48,4 @@ dependencies
 cleanup
 build
 
-pythonOutput=$(python ./pipeline.py 2>&1 > /dev/null)
-echo $pythonOutput
-
-#retry pythonOutput
+retry python ./pipeline.py
