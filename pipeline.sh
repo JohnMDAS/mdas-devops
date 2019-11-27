@@ -16,8 +16,7 @@ cleanup(){
     rm -rf build
 }
 #build
-build()
-{
+build(){
     mkdir build
     go build -o ./build ./src/votingapp 
     cp -r ./src/votingapp/ui ./build
@@ -25,6 +24,10 @@ build()
     pushd build
     ./votingapp &
     popd
+}
+
+test(){
+    python ./tests.py
 }
 
 retry(){
@@ -48,4 +51,4 @@ dependencies
 cleanup
 build
 
-retry python ./pipeline.py
+retry test

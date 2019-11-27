@@ -11,8 +11,8 @@ expectedWinner = "dev"
 data2 = '{"topic":"dev"}'
 requests.post(votingUrl, headers=headers, data=data)
 
-requests.put(votingUrl, data=data2, headers = headers)
-winner = requests.delete(votingUrl, headers = headers)
+requests.put(votingUrl, data=data2, headers=headers)
+winner = requests.delete(votingUrl, headers=headers)
 
 winner = json.loads(winner.text)['winner']
 
