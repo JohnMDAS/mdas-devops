@@ -16,8 +16,7 @@ cleanup(){
     rm -rf build
 }
 #build
-build()
-{
+build(){
     mkdir build
     go build -o ./build ./src/votingapp 
     cp -r ./src/votingapp/ui ./build
@@ -25,6 +24,12 @@ build()
     pushd build
     ./votingapp &
     popd
+}
+
+test(){
+    #Comment/Uncomment to use Pyhton or NodeJS script
+    #python ./tests.py
+    node ./tests.js
 }
 
 retry(){
@@ -48,7 +53,4 @@ dependencies
 cleanup
 build
 
-pythonOutput=$(python ./pipeline.py 2>&1 > /dev/null)
-echo $pythonOutput
-
-#retry pythonOutput
+retry test
