@@ -27,7 +27,9 @@ build(){
 }
 
 test(){
-    python ./tests.py
+    #Comment/Uncomment to use Pyhton or NodeJS script
+    #python ./tests.py
+    node ./tests.js
 }
 
 retry(){
