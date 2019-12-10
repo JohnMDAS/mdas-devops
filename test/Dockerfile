@@ -1,9 +1,9 @@
-FROM ubuntu:18.04
+FROM alpine:3.10.3
 
-RUN apt-get update && apt-get install -y \
+RUN apk add --update \
     curl \
     jq \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/cache/apk/*
 
 COPY test.sh .
 RUN chmod +x test.sh

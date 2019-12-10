@@ -10,9 +10,8 @@ RUN go build -o /build/votingapp && \
     cp -r ui /build
 
 #### RUNTIME ####
-FROM ubuntu:18.04
+FROM alpine:3.10.3
 
-#RUN apt-get update && apt-get install golang -y && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY --from=builder /build .
 ENTRYPOINT [ "./votingapp" ]
