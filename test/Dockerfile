@@ -8,4 +8,4 @@ RUN apk add --update \
 COPY test.sh .
 RUN chmod +x test.sh
 
-ENTRYPOINT [ "./test.sh" ]
+ENTRYPOINT ["bash", "-c", "./test.sh" ]
