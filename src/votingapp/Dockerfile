@@ -6,13 +6,22 @@ RUN go get github.com/gorilla/websocket && \
 
 COPY . .
 
-RUN go build -o /build/votingapp && \
+RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 \
+    go build -o /build/votingapp && \
     cp -r ui /build
 
 #### RUNTIME ####
-FROM ubuntu:18.04
+FROM alpine:3.10.3
 
-#RUN apt-get update && apt-get install golang -y && rm -rf /var/lib/apt/lists/*
+RUN apk add --update \
+    bash \
+    && rm -rf /var/cache/apk/*
+
+RUN mkdir -p /app
 WORKDIR /app
-COPY --from=builder /build .
-ENTRYPOINT [ "./votingapp" ]
+
+COPY --from=builder /build /app
+RUN chmod +x ./votingapp
+RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
+EXPOSE 8080
+ENTRYPOINT ["./votingapp"]
