@@ -3,7 +3,7 @@
 docker-compose rm -f &&\
 docker-compose up --build -d &&\
 docker-compose run --rm mytest &&\
-# docker-compose push &&\
+docker-compose push &&\
 echo "GREEN" || echo "RED"
 
 #deploy
