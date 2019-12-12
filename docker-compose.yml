@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  myredis:
+    image: redis
+
+  myvotingapp:
+    image: john/votingapp
+    build:
+      dockerfile: Dockerfile
+      context: ./src/votingapp
+    environment:
+      REDIS: "myredis:6379"
+
+  mytest:
+    image: john/votingapp-test
+    build:
+      context: ./test
+    environment:
+      VOTINGAPP_HOST: "myvotingapp"
+
+  mynginx:
+    image: mynginx
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    volumes:
+      # OPTION 2 mounting the file.
+      - ./nginx/config//nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 8080:80
