@@ -1,6 +1,7 @@
 FROM alpine:3.10.3
 
 RUN apk add --update \
+    bash \
     curl \
     jq \
     && rm -rf /var/cache/apk/*
@@ -8,4 +9,4 @@ RUN apk add --update \
 COPY test.sh .
 RUN chmod +x test.sh
 
-ENTRYPOINT ["bash", "-c", "./test.sh" ]
+ENTRYPOINT ["./test.sh"]

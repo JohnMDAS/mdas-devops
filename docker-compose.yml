@@ -13,8 +13,9 @@ services:
       REDIS: "myredis:6379"
 
   mytest:
-    image: john/votingapp-test
+    image: alpine:3.10.3
     build:
+      dockerfile: Dockerfile
       context: ./test
     environment:
       VOTINGAPP_HOST: "myvotingapp"
